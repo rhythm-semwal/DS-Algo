@@ -1,1 +1,1 @@
-# Scaler-Academy
+# DS Algo Practice Problems
