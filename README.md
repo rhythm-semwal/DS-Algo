@@ -1,1 +1,1 @@
-# Scaler-Academy
+# DS ALgo practice problems
