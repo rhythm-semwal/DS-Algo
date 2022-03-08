@@ -3,7 +3,7 @@ from operator import le
 
 
 class Solution:
-    #SC = O(1)
+    #SC = O
     def firstUniqChar(self, s: str) -> int:
         hash_map = defaultdict(int)
 
