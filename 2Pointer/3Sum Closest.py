@@ -8,7 +8,7 @@ class Solution:
         
         for i in range(len(nums)):
             p1, p2 = i+1, len(nums)-1
-            
+        
             if i > 0 and nums[i] == nums[i-1]:
                 continue
             
