@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def removeDuplicates(self, A: List[int]) -> int:
         # approach 1
