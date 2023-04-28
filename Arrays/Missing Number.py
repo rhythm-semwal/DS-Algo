@@ -22,13 +22,20 @@ class Solution2:
 
         return current
 
-# TC = O(n), SC = O(n)
+# TC = O(n), SC = O(1)
 class Solution3:
     def missingNumber(self, nums) -> int:
         missing = len(nums)
         for i in range(len(nums)):
             missing ^= i ^ nums[i]
         return missing
+
+class Solution4:
+    def missingNumber(self, nums) -> int:
+        n = len(nums)
+        m = sum(nums)
+
+        return (n*(n+1)//2) - m
 
 
 nums = [-8,-7,-6]
