@@ -57,6 +57,7 @@ class Solution:
 
         for word in products:
             for index, value in enumerate(searchWord):
+                # len(word) > index this conditions is there to check for string index out of range error
                 if len(word) > index and word[index] == value:
                     temp_list[index].append(word)
                 else:
@@ -65,8 +66,6 @@ class Solution:
         result = []
         for each in temp_list:
             result.append(each[:3])
-
-        return result
 
         return result
 
