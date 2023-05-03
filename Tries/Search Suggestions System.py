@@ -50,9 +50,32 @@ class Solution:
         return result
 
 
+class Solution:
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        products.sort()
+        temp_list = [[] for _ in range(len(searchWord))]
+
+        for word in products:
+            for index, value in enumerate(searchWord):
+                if len(word) > index and word[index] == value:
+                    temp_list[index].append(word)
+                else:
+                    break
+
+        result = []
+        for each in temp_list:
+            result.append(each[:3])
+
+        return result
+
+        return result
+
+
 if __name__ == '__main__':
+    # products = ["havana"]
+    # searchWord = "tatiana"
     products = ["mobile", "mouse", "moneypot", "monitor", "mousepad"]
-    searchWord = "mousep"
+    searchWord = "mouse"
     print(Solution().suggestedProducts(products, searchWord))
 
 
