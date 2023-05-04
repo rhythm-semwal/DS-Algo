@@ -1,6 +1,41 @@
 from typing import List
 
 
+class Solution:
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        products.sort()
+        trie = {}
+
+        for p in products:
+            t = trie
+            for index, ch in enumerate(p):
+                is_end = index == len(p)-1
+                if ch not in t:
+                    t[ch] = {
+                        'trie': {},
+                        'is_end': is_end,
+                        'data': [p]
+                    }
+                else:
+                    t[ch]['data'].append(p)
+
+                if is_end:
+                    t[ch]['is_end'] = is_end
+
+                t = t[ch]['trie']
+
+        result = [[] for _ in range(len(searchWord))]
+
+        for index, ch in enumerate(searchWord):
+            if ch in trie:
+                result[index] = trie[ch]['data'][:3]
+                trie = trie[ch]['trie']
+            else:
+                break
+
+        return result
+
+
 class Trie:
     def __init__(self):
         self.children = {}
@@ -71,11 +106,8 @@ class Solution:
 
 
 if __name__ == '__main__':
-    # products = ["havana"]
-    # searchWord = "tatiana"
-    products = ["mobile", "mouse", "moneypot", "monitor", "mousepad"]
-    searchWord = "mouse"
+    products = ["havana"]
+    searchWord = "tatiana"
+    # products = ["mobile", "mouse", "moneypot", "monitor", "mousepad"]
+    # searchWord = "mouse"
     print(Solution().suggestedProducts(products, searchWord))
-
-
-# ["mobile","moneypot","monitor","mouse","mousepad"]
