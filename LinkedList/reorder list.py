@@ -7,35 +7,38 @@
 class Solution:
     # @param A : head node of linked list
     # @return the head node in the linked list
-    def reorderList(self, A):
-        if A is None:
+    def reorderList(self, head) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        if head is None:
             return None
 
-        slow, fast = A, A
-        while fast is not None and fast.next is not None:
+        slow, fast = head, head
+
+        while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
 
-        current_node = slow
+        current = slow
         prev = None
 
-        while current_node is not None:
-            next = current_node.next
-            current_node.next = prev
-            prev = current_node
-            current_node = next
+        while current:
+            temp = current.next
+            current.next = prev
+            prev = current
+            current = temp
 
-        node1, node2 = A, prev
+        node1, node2 = head, prev
 
-        # node2.next condition is imp else it goes into an infinite loop
         while node2.next is not None:
-            temp1 = node1.next
-            temp2 = node2.next
+            node1_next = node1.next
+            node2_next = node2.next
 
             node1.next = node2
-            node2.next = temp1
+            node2.next = node1_next
 
-            node1 = temp1
-            node2 = temp2
+            node1 = node1_next
+            node2 = node2_next
 
-        return A
+        return head
