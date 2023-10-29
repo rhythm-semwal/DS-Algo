@@ -9,7 +9,25 @@ class Solution:
     # @param A : head node of linked list
     # @param B : integer
     # @return the head node in the linked list
-    def removeNthFromEnd(self, A, B):
+    def removeNthFromEnd(self, head, n: int):
+        current = head
+        ll_len = 0
+
+        while current:
+            ll_len += 1
+            current = current.next
+
+        if ll_len == n:
+            return head.next
+
+        node = head
+        for _ in range(ll_len - n - 1):
+            node = node.next
+
+        node.next = node.next.next
+        return head
+
+    def removeNthFromEnd1(self, A, B):
         if A.next is None and B == 1:
             A = None
             return A
