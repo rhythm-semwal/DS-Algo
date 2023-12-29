@@ -1,3 +1,6 @@
+""" https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/description/ """
+
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -66,7 +69,7 @@ class Solution2:
 
 
 if __name__ == "__main__":
-    arr = [1,3,4,7,1,2,6]
+    arr = [1, 3, 4, 7, 1, 2, 6]
     # arr = [1,2,3,4]
     # arr = [2,1]
     # arr = [1]

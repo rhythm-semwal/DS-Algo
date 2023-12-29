@@ -49,9 +49,35 @@ def arrayToList(arr, n):
 
     return root
 
-
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        # using 2 pointers and in a single pass
+        slow, fast = head, head
+        while n > 0:
+            fast = fast.next
+            n -= 1
+
+        '''this condition will handle when we have to remove the first element i.e 
+        n = length of linked list or nth element from the end where n is the length of LL
+        '''
+        if fast is None:
+            return head.next
+
+        while fast.next:
+            slow = slow.next
+            fast = fast.next
+
+        if slow.next.next:
+            slow.next = slow.next.next
+        else:
+            slow.next = None
+
+        return head
+
+
+class Solution1:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        # using multiple passes
 
         if head.next is None and n == 1:
             head = None
@@ -79,9 +105,10 @@ class Solution:
 
 if __name__ == "__main__":
     arr = [1, 2, 3, 4, 5]
-    # arr = [1]
+    arr = [1]
+    arr = [1, 2]
     n = len(arr)
     root = arrayToList(arr, n)
     display(root)
-    new_root = Solution().removeNthFromEnd(root, 4)
+    new_root = Solution().removeNthFromEnd(root, 2)
     display(new_root)

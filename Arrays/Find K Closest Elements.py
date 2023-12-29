@@ -1,7 +1,22 @@
 from typing import List
 
-
 class Solution:
+    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
+        low, high = 0, len(arr)-1
+
+        while high-low >= k:
+            if abs(arr[low]-x) > abs(arr[high]-x):
+                low += 1
+            else:
+                high -= 1
+
+        result = []
+        for i in range(low, high+1):
+            result.append(arr[i])
+
+        return result
+
+class Solution1:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
         """
         If the starting element is found, [start, start+k] elements can be returned.
@@ -31,16 +46,16 @@ at the end we'll end up with a value contained by lo's index which can be the st
 
 arr = [1,2,3,4,5]
 k = 4
-x = -1
+x = 3
 
 arr = [1]
 k = 1
 x = 1
-
-arr = [-2,-1,1,2,3,4,5]
-k = 7
-x = 3
-
+#
+# arr = [-2,-1,1,2,3,4,5]
+# k = 7
+# x = 3
+#
 arr = [0,0,1,2,3,3,4,7,7,8]
 k = 3
 x = 5
