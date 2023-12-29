@@ -49,13 +49,14 @@ class Solution2:
         return max_heap[0]*-1
 
 
+# minheap, add k element to minheap, if nums[i] > minheap[0], then pop and add it, else pass.
+#  Time: O(nlgk) Space: O(k) Runtime: 78%
 class Solution3:
     """
     @param k: An integer
     @param nums: An array
     @return: the Kth largest element
     """
-    # TC = O(nlgn + klgn)
     def kthLargestElement(self, k, nums):
         if not nums or not k or k < 0:
             return None
