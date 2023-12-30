@@ -3,19 +3,17 @@ class Solution:
     # @return a list of integers
     def nextGreater(self, A):
         n = len(A)
-        stack = list()
         result = [-1] * n
-        stack.append(A[-1])
+        stack = [A[-1]]
 
-        for i in range(len(A)-2, -1, -1):
+        for i in range(n-2, -1, -1):
             current = A[i]
-            while len(stack) > 0 and current >= stack[-1]:
+            while stack and current >= stack[-1]:
                 stack.pop()
 
-            if len(stack) == 0:
-                result[i] = -1
-            else:
+            if stack:
                 result[i] = stack[-1]
+
             stack.append(A[i])
 
         print(result)
