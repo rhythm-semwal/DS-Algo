@@ -78,28 +78,22 @@ class Solution:
 class Solution1:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         # using multiple passes
-
-        if head.next is None and n == 1:
-            head = None
-            return head
-
         length = 0
+        current = head
+
+        while current:
+            current = current.next
+            length += 1
+
+        if length == n:
+            return head.next
 
         current = head
-        while current is not None:
-            length += 1
+        for _ in range(length - n - 1):
             current = current.next
 
-        if length <= n:
-            temp = head
-            head = temp.next
-            return head
+        current.next = current.next.next
 
-        delete_node = head
-        for i in range(length-n-1):
-            delete_node = delete_node.next
-
-        delete_node.next = delete_node.next.next
         return head
 
 
