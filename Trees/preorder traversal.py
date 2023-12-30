@@ -32,7 +32,8 @@ class Solution:
             current = stack.pop()
 
             result.append(current.val)
-
+            # left node has to read first that's why I am pushing the right node first because then
+            # the left node would be at the top of the stack
             if current.right:
                 stack.append(current.right)
             if current.left:
