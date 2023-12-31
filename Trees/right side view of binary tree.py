@@ -6,7 +6,30 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution1:
+    def rightSideView(self, root):
+        if root is None:
+            return root
+
+        queue = [root]
+        result = []
+
+        while queue:
+            for i in range(len(queue)):
+                node = queue.pop(0)
+
+                if i == 0:
+                    result.append(node.val)
+
+                if node.right:
+                    queue.append(node.right)
+                if node.left:
+                    queue.append(node.left)
+
+        return result
+
+
+class Solution2:
     def rightSideView(self, root: TreeNode):
         if root is None:
             return []
