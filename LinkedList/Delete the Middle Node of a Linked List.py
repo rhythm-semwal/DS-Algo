@@ -37,6 +37,25 @@ def arrayToList(arr, n):
     return root
 
 
+# keep the track of prev node for the slow pointer
+class Solution:
+    def deleteMiddle(self, head):
+        if head is None:
+            return head
+        slow, fast = head, head
+        prev = None
+        while fast and fast.next:
+            prev = slow
+            slow = slow.next
+            fast = fast.next.next
+
+        if not prev:
+            return prev
+
+        prev.next = slow.next
+        return head
+
+
 class Solution1:
     def deleteMiddle(self, head):
         if head.next is None:
