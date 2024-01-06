@@ -18,7 +18,8 @@ class Solution1:
 
 
 """
-Basically the problem says, if in nums1 we are working on 4, then in nums2 first find where is 4 and from that index find the next number greater than 4 in nums2. We can see that the solution is always coming from the reverse side of the list nums2. This should tell us to use stack.
+Basically the problem says, if in nums1 we are working on 4, then in nums2 first find where is 4 and from that index find the next number greater than 4 in nums2. 
+We can see that the solution is always coming from the reverse side of the list nums2. This should tell us to use stack.
 
 Steps:
 
@@ -58,4 +59,8 @@ class Solution2:
 if __name__ == '__main__':
     nums1 = [2, 4]
     nums2 = [1, 2, 3, 4]
+
+    nums1 = [4, 1, 2]
+    nums2 = [1, 3, 4, 2]
+
     print(Solution2().nextGreaterElement(nums1, nums2))

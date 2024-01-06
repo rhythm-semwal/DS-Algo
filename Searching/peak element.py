@@ -1,4 +1,4 @@
-class Solution:
+class Solution1:
     # @param A : list of integers
     # @return an integer
     def solve(self, A):
@@ -18,6 +18,40 @@ class Solution:
                 start = mid+1
 
         return A[start]
+
+
+class Solution3:  # leetcode - return index of peak element
+    def findPeakElement(self, nums) -> int:
+        low, high = 0, len(nums) - 1
+
+        while low <= high:
+            mid = (low + high) // 2
+
+            if (mid == 0 or nums[mid] > nums[mid - 1]) and (mid == len(nums) - 1 or nums[mid] > nums[mid + 1]):
+                return mid
+            elif mid > 0 and nums[mid - 1] > nums[mid]:
+                high = mid - 1
+            else:
+                low = mid + 1
+
+        return high
+class Solution2:
+    def findPeakElement(self, nums) -> int:
+        max_number = nums[0]
+        index = 0
+
+        for i in range(1, len(nums)):
+            if i == len(nums) - 1:
+                if nums[i] > nums[i - 1] and nums[i] > max_number:
+                    max_number = nums[i]
+                    index = i
+            else:
+                if nums[i] > nums[i - 1] and nums[i] > nums[i + 1] and nums[i] > max_number:
+                    max_number = nums[i]
+                    index = i
+
+        return index
+
 
 if __name__ == '__main__':
     # A = [1, 2, 3, 4, 5]

@@ -1,6 +1,6 @@
 class Solution:
-    # @param A : list of integers
-    # @return a list of integers
+# @param A : list of integers
+# @return a list of integers
     def solve(self, A):
         stack1, stack2 = list(), list()
         stack1.append(A[0])

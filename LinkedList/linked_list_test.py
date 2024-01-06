@@ -1,3 +1,7 @@
+import sys
+from typing import Optional
+
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -65,14 +69,50 @@ class Solution2:
         return head
 
 
+class Solution1:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy_node = ListNode(0)
+        current = dummy_node
+        node1, node2 = l1, l2
+
+        carry_sum = 0
+        while node1 and node2:
+            current_sum = node1.val + node2.val + carry_sum
+            current.next = ListNode(current_sum%10)
+            carry_sum = current_sum // 10
+
+            current = current.next
+            node1 = node1.next
+            node2 = node2.next
+
+        while node1:
+            current_sum = node1.val + carry_sum
+            current.next = ListNode(current_sum % 10)
+            carry_sum = current_sum // 10
+
+            current = current.next
+            node1 = node1.next
+
+        while node2:
+            current_sum = node2.val + carry_sum
+            current.next = ListNode(current_sum % 10)
+            carry_sum = current_sum // 10
+
+            current = current.next
+            node2 = node2.next
+
+        if carry_sum > 0:
+            current.next = ListNode(carry_sum)
+
+        return dummy_node.next
+
+
+
+
 if __name__ == "__main__":
-    arr = [1,3,4,7,1,2,6]
-    # arr = [1,2,3,4]
-    # arr = [2,1]
-    # arr = [1]
+    arr = [5,2,13,3,8,5,4]
     n = len(arr)
     root = arrayToList(arr, n)
     display(root)
-    # Solution1().deleteMiddle(root)
-    Solution2().deleteMiddle(root)
-    display(root)
+    result = Solution1().removeNodes(root)
+    display(result)
