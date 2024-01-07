@@ -77,8 +77,7 @@ class Solution2:
 
 
 input = [3,5,1,6,2,0,8,None,None,7,4]
-p = TreeNode(5)
-q = TreeNode(1)
+p = TreeNode(7)
+q = TreeNode(8)
 tree_head = build_tree_from_array(input)
 result = Solution1().lowestCommonAncestor(tree_head, p, q)
-print(result.val)
