@@ -1,4 +1,7 @@
 # Definition for a binary tree node.
+from typing import Optional
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -6,7 +9,27 @@ class TreeNode:
         self.right = right
 
 
-class Solution:
+class Solution1:
+    def height(self, root):
+        if root is None:
+            return 0
+
+        left = self.height(root.left)
+        right = self.height(root.right)
+
+        return max(left, right) + 1
+
+    def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        if root is None:
+            return True
+
+        left = self.height(root.left)
+        right = self.height(root.right)
+
+        return abs(left - right) < 2 and self.isBalanced(root.left) and self.isBalanced(root.right)
+
+
+class Solution2:
     def isBalanced(self, root: TreeNode) -> bool:
         def helper(node):
             if node is None:

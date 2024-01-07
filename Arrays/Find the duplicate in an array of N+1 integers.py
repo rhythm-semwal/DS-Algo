@@ -9,6 +9,13 @@ answer
 """
 class Solution:
     def findDuplicate(self, nums) -> int:
+        for i in range(len(nums)):
+            if nums[abs(nums[i]) - 1] > 0:
+                nums[abs(nums[i]) - 1] *= -1
+            else:
+                return abs(nums[i])
+
+    def findDuplicate(self, nums) -> int:
         slow, fast = nums[0], nums[0]
         while True:
             slow = nums[slow]
