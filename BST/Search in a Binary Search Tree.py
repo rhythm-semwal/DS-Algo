@@ -42,9 +42,7 @@ class Solution:
             return
 
         if root.val == val:
-            result = []
-            self.subtree(root, result)
-            return result
+            return root
 
         if root.val > val:
             return self.searchBST(root.left, val)
