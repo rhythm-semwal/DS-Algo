@@ -88,3 +88,8 @@ class Solution:
                 hash_map[cum_sum] += 1
 
         return count
+
+
+A = [1,2,3,4,5]
+k = 9
+print(Solution().subarraySum(A, k))
