@@ -1,7 +1,7 @@
 from typing import List
 
 
-class Solution:
+class Solution1:
     def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
         products.sort()
         trie = {}
@@ -36,6 +36,30 @@ class Solution:
         return result
 
 
+class Solution2:
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        products.sort()
+
+        result = []
+
+        for index, ch in enumerate(searchWord):
+            count = 0
+            current = []
+            search_key = searchWord[:index + 1]
+
+            for p in products:
+                if search_key == p[:index + 1]:
+                    count += 1
+                    current.append(p)
+
+                if count == 3:
+                    break
+
+            result.append(current)
+
+        return result
+
+
 class Trie:
     def __init__(self):
         self.children = {}
@@ -64,7 +88,7 @@ class TrieNode:
         return temp.word
 
 
-class Solution:
+class Solution3:
     def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
         products.sort()
 
@@ -106,8 +130,8 @@ class Solution:
 
 
 if __name__ == '__main__':
-    products = ["havana"]
-    searchWord = "tatiana"
-    # products = ["mobile", "mouse", "moneypot", "monitor", "mousepad"]
-    # searchWord = "mouse"
+    # products = ["havana"]
+    # searchWord = "tatiana"
+    products = ["mobile", "mouse", "moneypot", "monitor", "mousepad"]
+    searchWord = "mouse"
     print(Solution().suggestedProducts(products, searchWord))
