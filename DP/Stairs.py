@@ -1,3 +1,18 @@
+class Solution1:  # without using extra space
+    def climbStairs(self, n: int) -> int:
+        if n == 1:
+            return 1
+
+        prev, curr = 1, 1
+
+        for i in range(2, n + 1):
+            temp = curr
+            curr = curr + prev
+            prev = temp
+
+        return curr
+
+
 class Solution:
     # @param A : integer
     # @return an integer

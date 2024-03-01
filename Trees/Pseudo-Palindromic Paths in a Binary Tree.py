@@ -30,6 +30,33 @@ def build_tree_from_array(arr):
     return nodes[0]
 
 
+class Solution1:
+    # TC = O(N)
+    # SC = O(H), where H is the height of the binary tree.
+    def pseudoPalindromicPaths(self, root: Optional[TreeNode]) -> int:
+        def traverse(node, pairs):
+            if not node:
+                return 0
+
+            if node.val in pairs:
+                pairs.remove(node.val)
+            else:
+                pairs.add(node.val)
+
+            if not node.left and not node.right:
+                return 1 if len(pairs) <= 1 else 0
+
+            left = traverse(node.left, set(pairs))
+            right = traverse(node.right, set(pairs))
+
+            return left + right
+
+        return traverse(root, set())
+
+
+# Memory Limit Exceeded
+# TC = O(N*D) where N is to find root to leaf path and D is for the loop where D is the height of tree
+# O(D), where D is the maximum depth (height) of the binary tree.
 class Solution:
     def root_to_leaf_path(self, root, path, result):
         if not root:
@@ -54,7 +81,19 @@ class Solution:
         result = []
 
         self.root_to_leaf_path(root, [], result)
-        print(result)
+
+        ans = 0
+
+        for arr in result:
+            visited = set()
+            for each in arr:
+                if each not in visited:
+                    visited.add(each)
+                else:
+                    visited.remove(each)
+            ans += 1 if len(visited) <= 1 else 0
+
+        return ans
 
 
 # input = [10,20,30,40,60,90,100, None, 5, 70, 75, None, None, 111, 112]
@@ -71,4 +110,4 @@ root2 = [3, 5, 1, 6, 7, 4, 2, None, None, None, None, None, None, 8, 9]
 root = [2, 1, 3]
 root = [2,3,1,3,1,None,1]
 tree_head = build_tree_from_array(root)
-Solution().pseudoPalindromicPaths(tree_head)
+print(Solution().pseudoPalindromicPaths(tree_head))

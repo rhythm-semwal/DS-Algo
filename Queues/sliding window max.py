@@ -71,11 +71,11 @@ class Solution3:
         return ans
 
 
-# A = [1, 3, -1, -3, 5, 3, 6, 7]
-# B = 3
+A = [1, 3, -1, -3, 5, 3, 6, 7]
+B = 3
 # A = [1, 2, 3, 4, 2, 7, 1, 3, 6]
 # B = 6
-A = [ 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ]
-B = 2
-print(Solution().slidingMaximum(A, B))
+# A = [ 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ]
+# B = 2
+print(Solution1().maxSlidingWindow(A, B))
 

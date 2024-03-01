@@ -1,7 +1,28 @@
 from typing import List
 
 
-class Solution:
+class Solution1:
+    def maxLength(self, arr) -> int:
+        dp = [set()]
+
+        for a in arr:
+            # if duplicate elements are present then ignore the word
+            if len(set(a)) < len(a):
+                continue
+
+            a = set(a)
+
+            for each in dp:
+                # if there are duplicate words then do not consider it
+                if a & each:
+                    continue
+                # append both words here if no duplicates are there
+                dp.append(a | each)
+
+        return max(len(a) for a in dp)
+
+
+class Solution2:
     def maxLength(self, arr: List[str]) -> int:
         dp = [set()]
 
@@ -21,9 +42,3 @@ class Solution:
             dp.extend(temp)
 
         return max(len(a) for a in dp)
-
-
-arr = ["un","iq","ue"]
-# arr = ["cha","r","act","ers"]
-# arr = ["abcdefghijklmnopqrstuvwxyz"]
-print(Solution().maxLength(arr))

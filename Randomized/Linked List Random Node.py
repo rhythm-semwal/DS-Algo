@@ -39,7 +39,7 @@ def arrayToList(arr, n):
     return root
 
 
-class Solution:
+class Solution1:
     def __init__(self, head: Optional[ListNode]):
         self.head = head
         self.list = self.make_list(self.head)
@@ -55,16 +55,30 @@ class Solution:
         return result
 
     def getRandom(self) -> int:
-        print(random.choice(self.list).val)
+        return random.choice(self.list).val
 
+
+class Solution2:
+    def __init__(self, head: Optional[ListNode]):
+        self.head = head
+
+    def getRandom(self) -> int:
+        curr = self.head
+        val = curr.val
+        i = 1
+        while curr.next:
+            curr = curr.next
+            i += 1
+            if random.randint(1, i) == 1:
+                val = curr.val
+        return val
 
 
 if __name__ == "__main__":
     arr = [2,7,4,3,5]
-    # arr = [3, 3]
     n = len(arr)
     root = arrayToList(arr, n)
     display(root)
 
-    obj = Solution(root)
-    param_1 = obj.getRandom()
+    obj = Solution2(root)
+    print(obj.getRandom())

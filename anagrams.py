@@ -1,26 +1,42 @@
-class Solution:
-    # @param A : tuple of strings
-    # @return a list of list of integers
-    def anagrams(self, A):
-        sorted_list = [''.join(sorted(ele)) for ele in A]
-        print(sorted_list)
+from collections import defaultdict
+from typing import List
 
-        words_dict = dict()
-        result_list = list()
 
-        for index, value in enumerate(sorted_list):
-            if value in words_dict:
-                words_dict[value].append(index+1)
+class Solution1:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        hash_map = defaultdict(list)
+
+        for word in strs:
+            sorted_word = "".join(sorted(word))
+            hash_map[sorted_word].append(word)
+
+        return list(hash_map.values())
+
+
+class Solution2:
+    def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        sorted_strs = []
+        for each in strs:
+            sorted_strs.append("".join(sorted(each)))
+
+        hash_dict = dict()
+        for index, value in enumerate(sorted_strs):
+            if value not in hash_dict:
+                hash_dict[value] = [index]
             else:
-                words_dict[value] = [index+1]
+                hash_dict[value].append(index)
 
-        for key, value in words_dict.items():
-            result_list.append(value)
+        result = []
 
-        print(result_list)
+        for key, value in hash_dict.items():
+            temp = []
+            for each in value:
+                temp.append(strs[each])
+
+            result.append(temp)
+
+        return result
 
 
-if __name__ == "__main__":
-    # A = ["cat", "dog", "god", "tca"]
-    A = ["rat", "tar", "art"]
-    Solution().anagrams(A)
+strs = ["eat","tea","tan","ate","nat","bat"]
+print(Solution1().groupAnagrams(strs))
