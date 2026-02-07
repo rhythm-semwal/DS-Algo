@@ -1,0 +1,52 @@
+# https://leetcode.com/problems/minimum-number-of-operations-to-make-elements-in-array-distinct/description/
+
+from collections import defaultdict
+from typing import List
+
+
+class Solution1:
+    # TC = O(n^2)
+    def minimumOperations(self, nums: List[int]) -> int:
+
+        def check_unique(start):
+            seen = set()
+
+            for num in nums[start:]:
+                if num in seen:
+                    return False
+                seen.add(num)
+
+            return True
+
+        ans = 0
+        for i in range(0, len(nums), 3):
+            if check_unique(i):
+                return ans
+            ans += 1
+
+        return ans
+
+class Solution2:
+    #TC = O(N)
+    def minimumOperations(self, nums: List[int]) -> int:
+        seen = set()
+        valid_start = 0
+        for i in range(len(nums)-1, -1, -1):
+            if nums[i] not in seen:
+                seen.add(nums[i])
+                valid_start = i
+            else:
+                break
+
+        operations = valid_start // 3
+        if valid_start % 3 != 0:
+            operations += 1
+
+        return operations
+
+
+if __name__ == "__main__":
+    # nums = [1, 2, 3, 4, 2, 3, 3, 5, 7]
+    nums = [6,7,8,9]
+    nums = [4, 5, 6, 4, 4]
+    print(Solution2().minimumOperations(nums))
