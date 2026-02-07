@@ -1,0 +1,55 @@
+"""
+I receive a list of hotel id and score from stein and print to stout the hotel id sorted in decreasing order of average score . If two hotel have the same average score then hotel with the lower id will be printed first
+
+Example
+4
+1000 8
+2000 8
+2000 10
+1000 9
+
+Output
+2000
+1000
+"""
+
+from typing import List
+from collections import defaultdict
+
+
+class Solution:
+    def problem(self, input):
+        score_dict = defaultdict(list)
+
+        result = []
+        for i in range(len(input)):
+
+            hotel_id = input[i][0]
+            rating = input[i][1]
+
+            score_dict[hotel_id].append(rating)
+
+        average = []
+        for hotel_id, values in score_dict.items():
+            avg = sum(values) / len(values)
+            average.append((hotel_id, avg))
+
+        print(average)
+        # average.sort(key= lambda x: (-x[1], x[0])) // this or the below one
+        average.sort(key=lambda x: x[0])
+        print(average)
+        average.sort(key=lambda x: x[1], reverse=True)
+
+        print(average)
+
+        for hotel_id, _ in average:
+            result.append(hotel_id)
+
+        return result
+
+
+if __name__ == '__main__':
+    input = [[1000,8], [2000,8],[2000, 8], [1000, 8]]
+    input = [[1000, 8], [2000, 8], [2000, 10], [1000, 8]]
+    result = Solution().problem(input)
+    print(result)
