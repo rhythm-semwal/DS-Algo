@@ -1,0 +1,104 @@
+# https://leetcode.com/problems/reward-top-k-students/description/
+
+from collections import defaultdict
+from typing import List
+from heapq import heappush, heappop
+
+
+class Solution1:
+    # TC = nlogn
+    def topStudents(self, positive_feedback: List[str], negative_feedback: List[str], report: List[str],
+                    student_id: List[int], k: int) -> List[int]:
+
+
+        positive_feedback_set= set(positive_feedback)
+        negative_feedback_set = set(negative_feedback)
+
+        result = []
+
+        for i in range(len(student_id)):
+            score = 0
+            feedback = report[i]
+
+            feedback_word_list = feedback.split(" ")
+
+            for word in feedback_word_list:
+                if word in positive_feedback_set:
+                    score += 3
+                elif word in negative_feedback_set:
+                    score -= 1
+
+            print(score)
+            result.append((student_id[i],score))
+
+        print(result)
+
+        result.sort(key=lambda x:x[0])
+        result.sort(key=lambda x: x[1], reverse=True)
+
+        print(result)
+
+        final_result = []
+        for student_id, _ in result:
+            final_result.append(student_id)
+
+        return final_result[:k]
+
+
+class Solution2:
+    # TC = nlogk
+    def topStudents(self, positive_feedback: List[str], negative_feedback: List[str], report: List[str],
+                    student_id: List[int], k: int) -> List[int]:
+
+
+        positive_feedback_set= set(positive_feedback)
+        negative_feedback_set = set(negative_feedback)
+
+        heap = []
+
+        for i in range(len(student_id)):
+            score = 0
+
+            for word in  report[i].split(" "):
+                if word in positive_feedback_set:
+                    score += 3
+                elif word in negative_feedback_set:
+                    score -= 1
+
+            # Push (score, -student_id)
+            # Since it’s a min-heap:
+            # 	•	Lower scores get popped first
+            # 	•	For equal scores, larger IDs are popped first (-student_id trick)
+            heappush(heap, (score, -student_id[i]))
+
+            if len(heap) > k:
+                heappop(heap)
+
+        print(heap)
+        result = []
+        while heap:
+            score, student_id = heappop(heap)
+            result.append(-student_id)
+
+        print(result)
+
+        # Since it’s a min-heap:
+        # 	•	Lower scores get popped first
+        # 	•	For equal scores, larger IDs are popped first (-student_id trick)
+        return result[::-1]
+
+if __name__ == "__main__":
+    positive_feedback = ["smart","brilliant","studious"]
+    negative_feedback = ["not"]
+    report = ["this student is studious","the student is smart"]
+    student_id = [1,2]
+    k = 2
+
+    print(Solution2().topStudents(positive_feedback, negative_feedback, report, student_id, k))
+
+    positive_feedback = ["smart", "brilliant", "studious"]
+    negative_feedback = ["not"]
+    report = ["this student is not studious", "the student is smart"]
+    student_id = [1, 2]
+    k = 2
+    print(Solution2().topStudents(positive_feedback, negative_feedback, report, student_id, k))
