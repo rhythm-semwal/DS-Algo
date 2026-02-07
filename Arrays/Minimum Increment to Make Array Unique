@@ -1,4 +1,6 @@
 # https://leetcode.com/problems/minimum-increment-to-make-array-unique/description/
+# Time complexity: O(n+max)
+# Space complexity: O(n+max)
 
 class Solution:
     def minIncrementForUnique(self, nums: List[int]) -> int:
