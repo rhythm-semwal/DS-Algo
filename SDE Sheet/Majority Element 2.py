@@ -1,3 +1,20 @@
+"""
+Approach with O(1) space
+O(1) space using the Boyer-Moore Voting Algorithm. Let me explain why this works and how to implement it.
+Key Mathematical Insight
+At most 2 elements can appear more than n/3 times in any array.
+n
+Why? Proof by contradiction:If 3 elements each appear > n/3 times:  Total count > n/3 + n/3 + n/3 = n  But array only has n elements! Contradiction!Therefore: At most 2 candidates possible.
+Boyer-Moore Voting Algorithm
+Core idea: Maintain at most 2 candidates with counts. When counts cancel out, change candidates.
+The 3-Way Cancellation Rule
+If we have 3 DIFFERENT elements, cancel all 3:
+  [A, B, C] → removes one of each
+  
+What remains after all cancellations are the majority elements!
+If we have 3 DIFFERENT elements, cancel all 3:  [A, B, C] → removes one of each  What remains after all cancellations are the majority elements!
+"""
+
 from typing import List
 
 
