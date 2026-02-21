@@ -13,22 +13,28 @@ then return the updated height
 """
 
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
 class Solution:
-    def helper(self, node, diameter):
-        if node is None:
-            return 0
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        self.diameter = 0
+        def dfs(node):
+            if node is None:
+                return 0
+        
+            left = dfs(node.left)
+            right = dfs(node.right)
 
-        left = self.helper(node.left, diameter)
-        right = self.helper(node.right, diameter)
+            self.diameter = max(self.diameter, left+right)
+            return 1 + max(left, right)
 
-        diameter[0] = max(diameter[0], left + right)
-        return 1 + max(left, right)
-
-    def diameterOfBinaryTree(self, root: TreeNode) -> int:
-        # passing list because of call by reference, then the value will be updated in result list and return it
-        result = [0]
-        self.helper(root, result)
-        return result[0]
+        dfs(root)
+        return self.diameter
 
 
 root = TreeNode(1)
